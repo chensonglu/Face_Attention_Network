@@ -48,7 +48,7 @@ def main(args=None):
 
     parser.add_argument('--model_name', help='Name of the model to save')
     parser.add_argument('--parallel', help='Run training with DataParallel', dest='parallel',
-                        default=False, action='store_true')
+                        default=True, action='store_true')
     parser.add_argument('--pretrained', help='Pretrained model name in weight directory')
 
     parser = parser.parse_args(args)
@@ -112,7 +112,7 @@ def main(args=None):
         print('load pretrained backbone')
 
     print(retinanet)
-    retinanet = torch.nn.DataParallel(retinanet, device_ids=[0])
+    retinanet = torch.nn.DataParallel(retinanet, device_ids=[0,1,2,3])
     if is_cuda:
         retinanet.cuda()
 
@@ -193,7 +193,7 @@ def main(args=None):
             del regression_loss
             del loss
 
-        if parser.wider_val is not None:
+        if parser.wider_val is not None or parser.csv_val is not None:
             print('Evaluating dataset')
 
             mAP = evaluate(dataset_val, retinanet, is_cuda=is_cuda)

@@ -311,8 +311,9 @@ class ResNet(nn.Module):
             mask_loss = self.levelattentionLoss(img_batch.shape, attention, annotations)
             return clc_loss, reg_loss, mask_loss
         else:
-            # transformed_anchors = self.regressBoxes(anchors, regression)
-            transformed_anchors = self.clipBoxes()
+            transformed_anchors = self.regressBoxes(anchors, regression)
+            # transformed_anchors = self.clipBoxes()
+            transformed_anchors = self.clipBoxes(transformed_anchors, img_batch)
 
             scores = torch.max(classification, dim=2, keepdim=True)[0]
             scores_over_thresh = (scores > 0.05)[0, :, 0]

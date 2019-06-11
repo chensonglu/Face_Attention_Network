@@ -32,9 +32,9 @@ def fan_detect(model, img_name, threshold=0.9, max_detections=100, is_cuda=True)
         if is_cuda:
             img_data = img_data.cuda()
         scores, labels, boxes = model(img_data)
-        scores = scores.numpy()
+        scores = scores.cpu().numpy()
         scale = transformed['scale']
-        boxes = boxes.numpy() / scale
+        boxes = boxes.cpu().numpy() / scale
 
         indices = np.where(scores > threshold)[0]
         scores = scores[indices]
@@ -78,7 +78,7 @@ def main(args=None):
 
     model = load_model(parser.model, is_cuda=is_cuda)
     boxes = fan_detect(model, parser.image, threshold=parser.threshold, is_cuda=is_cuda)
-    print(json.dumps(boxes))
+    # print(json.dumps(boxes))
     if parser.rect:
         img_rectangles(parser.image, parser.rect, boxes)
 

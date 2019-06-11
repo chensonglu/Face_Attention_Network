@@ -1,0 +1,1 @@
+python3 eval.py --csv_classes /data/WIDERFace/classes.txt --csv_val /data/WIDERFace/val.txt --model ckpt/result_30.pt

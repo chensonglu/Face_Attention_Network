@@ -1,0 +1,1 @@
+python3 detector.py --model ckpt/result_30.pt --image /dataset/WIDERFace/WIDER_test/images/0--Parade/0_Parade_marchingband_1_11.jpg --rect /code/PyCharmProjects/Face_Attention_Network/img/result.jpg

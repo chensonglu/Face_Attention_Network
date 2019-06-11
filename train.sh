@@ -1,0 +1,1 @@
+python3 train.py --csv_train /data/WIDERFace/train.txt --csv_val /data/WIDERFace/val.txt --csv_classes /data/WIDERFace/classes.txt --depth 18 --model_name result --pretrained resnet18-5c106cde.pth --batch_size 4
