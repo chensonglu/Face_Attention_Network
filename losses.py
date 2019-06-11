@@ -163,9 +163,9 @@ class FocalLoss(nn.Module):
                 targets = torch.stack((targets_dx, targets_dy, targets_dw, targets_dh))
                 targets = targets.t()
 
-                targets = targets / torch.Tensor([[0.1, 0.1, 0.2, 0.2]])
-                if self.is_cuda:
-                    targets = targets.cuda()
+                targets = targets / torch.Tensor([[0.1, 0.1, 0.2, 0.2]]).cuda()
+                # if self.is_cuda:
+                #     targets = targets.cuda()
 
                 regression_diff = torch.abs(targets - regression[positive_indices, :])
 
